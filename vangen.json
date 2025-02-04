@@ -1,5 +1,5 @@
 {
-    "domain": "pkg.lucas.icu",
+    "domain": "go.lucas.icu",
     "index": false,
     "docsDomain": "pkg.go.dev",
     "repositories": [
@@ -28,6 +28,11 @@
                 "publisher"
             ],
             "url": "https://github.com/lixin9311/moralis"
+        },
+        {
+            "prefix": "x",
+            "type": "git",
+            "url": "https://github.com/lixin9311/x"
         }
     ]
 }

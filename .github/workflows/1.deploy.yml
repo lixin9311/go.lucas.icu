@@ -23,24 +23,34 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Build static content
         shell: bash
         run: |
           go run 4d63.com/vangen@latest -out=site
+
       - name: Setup Pages
-        uses: actions/configure-pages@v2
+        uses: "actions/configure-pages@v5"
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: "actions/upload-pages-artifact@v3"
         with:
           # Upload entire repository
           path: "site"
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
